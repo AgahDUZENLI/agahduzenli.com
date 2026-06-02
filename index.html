@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agah Duzenli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+    <!-- big hero title -->
+    <div class="hero-title">
+    <h1>Agah Duzenli</h1>
+    <p>Architect · Developer · Researcher</p>
+    </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <span class="nav-name">Agah Duzenli</span>
+      <span class="nav-tagline">Architect · Developer · Researcher</span>
+    </div>
+    <div class="nav-right">
+      <a href="cv.pdf" target="_blank">CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="scene-wrapper">
+      <img src="assets/images/hero/idle.png" class="scene-base" alt="Agah's creative compound" />
+
+      <!-- hover layers -->
+      <img src="assets/images/hero/hover-character.png" class="scene-layer" id="layer-character" alt="" />
+      <img src="assets/images/hero/hover-garage.png"    class="scene-layer" id="layer-garage"    alt="" />
+      <img src="assets/images/hero/hover-library.png"   class="scene-layer" id="layer-library"   alt="" />
+      <img src="assets/images/hero/hover-studio.png"    class="scene-layer" id="layer-studio"    alt="" />
+      <img src="assets/images/hero/hover-tennis.png"    class="scene-layer" id="layer-tennis"    alt="" />
+
+      <!-- hotspots -->
+      <div class="hotspot" id="hs-character" data-label="About me"    data-target="about"        data-layer="layer-character"></div>
+      <div class="hotspot" id="hs-house"     data-label="Architecture" data-target="architecture" data-layer="layer-studio"></div>
+      <div class="hotspot" id="hs-studio"    data-label="Design"       data-target="design"       data-layer="layer-studio"></div>
+      <div class="hotspot" id="hs-garage"    data-label="CS & Code"    data-target="cs"           data-layer="layer-garage"></div>
+      <div class="hotspot" id="hs-library"   data-label="Research"     data-target="research"     data-layer="layer-library"></div>
+      <div class="hotspot" id="hs-tennis"    data-label=""             data-target=""             data-layer="layer-tennis"></div>
+
+      <!-- tooltip -->
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <div class="scroll-indicator" id="scroll-indicator">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="content-section" id="about">
+    <div class="section-inner">
+      <div class="section-label">01 — About</div>
+      <h2>Hello, I'm Agah.</h2>
+      <p class="section-body">
+        I started my journey in architecture — designing spaces, thinking about how people move through environments, how light and material shape experience. Then I found myself equally drawn to building in code. Now I sit at the intersection of both: designing systems that are as considered as buildings.
+      </p>
+      <p class="section-body">
+        I'm currently pursuing computer science with plans toward a PhD, exploring how computational thinking and design can inform each other. When I'm not at a desk, I'm on a tennis court or behind a camera.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="content-section alt" id="architecture">
+    <div class="section-inner">
+      <div class="section-label">02 — Architecture</div>
+      <h2>Built work & drawings.</h2>
+      <p class="section-body">Architectural projects, designs, drawings, and built work. Add your projects here.</p>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Type</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Type</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Type</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="content-section" id="design">
+    <div class="section-inner">
+      <div class="section-label">03 — Digital Art & Design</div>
+      <h2>Visual work.</h2>
+      <p class="section-body">Graphic design, digital art, photography, and visual experiments. Add your work here.</p>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Medium</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Medium</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Medium</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CS -->
+  <section class="content-section alt" id="cs">
+    <div class="section-inner">
+      <div class="section-label">04 — CS & Code</div>
+      <h2>Built in the garage.</h2>
+      <p class="section-body">Software projects, tools, and experiments. Add your projects here.</p>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Stack</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Stack</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb"></div>
+          <div class="project-info">
+            <span class="project-title">Project Title</span>
+            <span class="project-meta">Year · Stack</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="content-section" id="research">
+    <div class="section-inner">
+      <div class="section-label">05 — Research</div>
+      <h2>From the library.</h2>
+      <p class="section-body">Publications, papers, and ongoing research interests. Add your work here.</p>
+      <div class="pub-list">
+        <div class="pub-item">
+          <span class="pub-title">Publication Title</span>
+          <span class="pub-meta">Year · Venue</span>
+        </div>
+        <div class="pub-item">
+          <span class="pub-title">Publication Title</span>
+          <span class="pub-meta">Year · Venue</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="content-section alt" id="contact">
+    <div class="section-inner contact-inner">
+      <div class="section-label">06 — Contact</div>
+      <h2>Let's talk.</h2>
+      <div class="contact-links">
+        <a href="mailto:your@email.com">your@email.com</a>
+        <a href="https://linkedin.com/in/agahduzenli" target="_blank">LinkedIn</a>
+        <a href="https://github.com/AgahDUZENLI" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
