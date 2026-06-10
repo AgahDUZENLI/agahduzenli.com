@@ -7,66 +7,74 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- preload all hero image variants so hover states are instant -->
+  <link rel="preload" as="image" href="assets/images/hero/idle.webp">
+  <link rel="preload" as="image" href="assets/images/hero/hover-character.webp">
+  <link rel="preload" as="image" href="assets/images/hero/hover-garage.webp">
+  <link rel="preload" as="image" href="assets/images/hero/hover-library.webp">
+  <link rel="preload" as="image" href="assets/images/hero/hover-studio.webp">
+  <link rel="preload" as="image" href="assets/images/hero/hover-tennis.webp">
+
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 
-    <!-- big hero title -->
-    <div class="hero-title">
-    <h1>Agah Duzenli</h1>
-    <p>Developer · Researcher</p>
-    </div>
-
   <!-- NAV -->
   <nav>
     <div class="nav-left">
-      <span class="nav-name">Agah Duzenli</span>
-      <span class="nav-tagline">Developer · Researcher</span>
+      <span class="nav-name" id="nav-name"></span>
     </div>
+
     <div class="nav-right">
-      <a href="cv.pdf" target="_blank">CV</a>
-      <a href="#contact">Contact</a>
+      <a href="#" data-target="architecture">Works</a>
+      <a href="#" data-target="about">About</a>
+      <a href="#" data-target="research">Research</a>
+      <a href="#" id="contact-link" data-target="contact">Contact</a>
     </div>
   </nav>
 
   <!-- HERO -->
-   <section class="hero" id="hero">
+  <section class="hero" id="hero">
+
+    <div class="hero-title" id="hero-title">
+      <h1>Agah Duzenli</h1>
+      <p>Developer · Researcher</p>
+    </div>
+
     <div class="scene-wrapper" id="scene-wrapper">
-      <!-- Base Image -->
-       <img src="assets/images/hero/idle.webp" class="scene-base" id="scene-base" alt="Agah's creative compound" />
- 
-      <!-- hover layers (one per hotspot) -->
+
+      <img src="assets/images/hero/idle.webp" class="scene-base" id="scene-base" alt="Agah's creative compound" />
+
       <img src="assets/images/hero/hover-character.webp" class="scene-layer" id="layer-character" alt="" />
       <img src="assets/images/hero/hover-garage.webp"    class="scene-layer" id="layer-garage"    alt="" />
       <img src="assets/images/hero/hover-library.webp"   class="scene-layer" id="layer-library"   alt="" />
       <img src="assets/images/hero/hover-studio.webp"    class="scene-layer" id="layer-studio"    alt="" />
       <img src="assets/images/hero/hover-tennis.webp"    class="scene-layer" id="layer-tennis"    alt="" />
 
-      <!-- hotspots — position with CSS -->
       <div class="hotspot" id="hs-character" data-label="About me"     data-target="about"        data-layer="layer-character"></div>
       <div class="hotspot" id="hs-house"     data-label="Architecture" data-target="architecture" data-layer="layer-studio"></div>
       <div class="hotspot" id="hs-studio"    data-label="Design"       data-target="design"       data-layer="layer-studio"></div>
       <div class="hotspot" id="hs-garage"    data-label="CS & Code"    data-target="cs"           data-layer="layer-garage"></div>
       <div class="hotspot" id="hs-library"   data-label="Research"     data-target="research"     data-layer="layer-library"></div>
-      <div class="hotspot" id="hs-tennis"    data-label="Design"       data-target="design"       data-layer="layer-tennis"></div>
+      <div class="hotspot" id="hs-tennis"    data-label="Tennis"       data-target="tennis"       data-layer="layer-tennis"></div>
 
-      <!-- tooltip -->
-            <div class="tooltip" id="tooltip"></div>
-      
-            <!-- hero title — shown only when no panel is open -->
-            <div class="hero-title" id="hero-title">
-              <h1>Agah Duzenli</h1>
-              <p>Developer · Researcher</p>
-            </div>
-      
-        </section>
-      
-        <!-- SIDE PANEL -->
-        <div class="side-panel" id="side-panel">
-          <div class="panel-inner" id="panel-content">
-          </div>
-        </div>
-      
-        <script src="js/script.js"></script>
-      </body>
+      <div class="tooltip" id="tooltip"></div>
+
+    </div>
+
+  </section>
+
+  <!-- SIDE PANEL -->
+  <div class="side-panel" id="side-panel">
+    <div class="panel-inner" id="panel-content"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Agah Duzenli. All rights reserved.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
 </html>

@@ -1,113 +1,64 @@
 /* ─────────────────────────────────────────
-   STATE
+   SECTIONS
 ───────────────────────────────────────── */
-let openTabs  = [];
-let activeTab = null;
+const SECTIONS = {
+  about:        { label: 'About',        file: 'sections/about.html' },
+  contact:      { label: 'Contact',      file: 'sections/contact.html' },
+  cs:           { label: 'CS & Code',    file: 'sections/cs.html' },
+  research:     { label: 'Research',     file: 'sections/research.html' },
+  architecture: { label: 'Architecture', file: 'sections/architecture.html' },
+  design:       { label: 'Design',       file: 'sections/design.html' },
+  tennis:       { label: 'Tennis',       file: 'sections/tennis.html' },
+};
 
 /* ─────────────────────────────────────────
    ELEMENTS
 ───────────────────────────────────────── */
-const nav         = document.getElementById('nav');
-const hero        = document.getElementById('hero');
-const sidePanel   = document.getElementById('side-panel');
-const panelContent= document.getElementById('panel-content');
-const navTabsEl   = document.getElementById('nav-tabs');
-const navName     = document.getElementById('nav-name');
-const heroTitle   = document.getElementById('hero-title');
-const scrollHint  = document.getElementById('scroll-hint');
-const tooltip     = document.getElementById('tooltip');
-const hotspots    = document.querySelectorAll('.hotspot');
-const contactLink = document.getElementById('contact-link');
-
-/* ─────────────────────────────────────────
-   NAV VISIBILITY
-   Nav slides in after a short delay on load,
-   or immediately when a panel opens.
-───────────────────────────────────────── */
-setTimeout(() => nav.classList.add('visible'), 800);
+const hero         = document.getElementById('hero');
+const sidePanel    = document.getElementById('side-panel');
+const panelContent = document.getElementById('panel-content');
+const navName      = document.getElementById('nav-name');
+const heroTitle    = document.getElementById('hero-title');
+const tooltip      = document.getElementById('tooltip');
+const hotspots     = document.querySelectorAll('.hotspot');
 
 /* ─────────────────────────────────────────
    PANEL OPEN / CLOSE
 ───────────────────────────────────────── */
-function openSection(id) {
-  if (!SECTIONS[id]) return;
-  if (!openTabs.includes(id)) openTabs.push(id);
-  activeTab = id;
+function setActiveNavLink(id) {
+  document.querySelectorAll('.nav-right a[data-target]').forEach(link => {
+    link.classList.toggle('active', link.dataset.target === id);
+  });
+}
 
-  renderPanel();
-  renderTabs();
+async function openSection(id) {
+  const s = SECTIONS[id];
+  if (!s) return;
 
-  nav.classList.add('visible');
+  if (!s.body) {
+    try {
+      const res = await fetch(s.file);
+      s.body = await res.text();
+    } catch {
+      s.body = '<p class="section-body">Content unavailable.</p>';
+    }
+  }
+
+  panelContent.innerHTML = `<p class="section-label">${s.label}</p>${s.body}`;
+  sidePanel.scrollTop = 0;
+
+  setActiveNavLink(id);
   hero.classList.add('panel-open');
   sidePanel.classList.add('open');
   heroTitle.classList.add('hidden');
-  scrollHint.classList.add('hidden');
 }
 
-function closeAllPanels() {
-  activeTab = null;
-  openTabs  = [];
-
-  renderTabs();
+function closePanel() {
+  setActiveNavLink(null);
   clearHoverLayers();
-
   hero.classList.remove('panel-open');
   sidePanel.classList.remove('open');
   heroTitle.classList.remove('hidden');
-  scrollHint.classList.remove('hidden');
-}
-
-function switchToTab(id) {
-  activeTab = id;
-  renderPanel();
-  renderTabs();
-}
-
-function closeTab(id, e) {
-  e.stopPropagation();
-  openTabs = openTabs.filter(t => t !== id);
-
-  if (openTabs.length === 0) { closeAllPanels(); return; }
-
-  if (activeTab === id) {
-    activeTab = openTabs[openTabs.length - 1];
-    renderPanel();
-  }
-
-  renderTabs();
-}
-
-/* ─────────────────────────────────────────
-   RENDER
-───────────────────────────────────────── */
-function renderPanel() {
-  const s = SECTIONS[activeTab];
-  if (!s) return;
-
-  panelContent.innerHTML = `
-    <div class="section-label">${s.label}</div>
-    <h2>${s.title}</h2>
-    ${s.body}
-  `;
-
-  sidePanel.scrollTop = 0;
-}
-
-function renderTabs() {
-  navTabsEl.innerHTML = '';
-
-  openTabs.forEach(id => {
-    const shortLabel = SECTIONS[id].label.split('— ')[1];
-
-    const tab = document.createElement('div');
-    tab.className = 'nav-tab' + (activeTab === id ? ' active' : '');
-    tab.innerHTML = `${shortLabel}<span class="tab-close" title="Close">✕</span>`;
-
-    tab.addEventListener('click', () => switchToTab(id));
-    tab.querySelector('.tab-close').addEventListener('click', (e) => closeTab(id, e));
-
-    navTabsEl.appendChild(tab);
-  });
 }
 
 /* ─────────────────────────────────────────
@@ -118,10 +69,9 @@ function clearHoverLayers() {
 }
 
 hotspots.forEach(hs => {
-  const layerId  = hs.dataset.layer;
+  const layer    = hs.dataset.layer ? document.getElementById(hs.dataset.layer) : null;
   const label    = hs.dataset.label;
   const targetId = hs.dataset.target;
-  const layer    = layerId ? document.getElementById(layerId) : null;
 
   hs.addEventListener('mouseenter', () => {
     if (layer) layer.classList.add('visible');
@@ -145,18 +95,18 @@ hotspots.forEach(hs => {
 function positionTooltip(hs) {
   const wrapRect = document.querySelector('.scene-wrapper').getBoundingClientRect();
   const hsRect   = hs.getBoundingClientRect();
-  const cx = hsRect.left - wrapRect.left + hsRect.width / 2;
-  const cy = hsRect.top  - wrapRect.top;
-  tooltip.style.left = cx + 'px';
-  tooltip.style.top  = cy + 'px';
+  tooltip.style.left = (hsRect.left - wrapRect.left + hsRect.width / 2) + 'px';
+  tooltip.style.top  = (hsRect.top  - wrapRect.top) + 'px';
 }
 
 /* ─────────────────────────────────────────
-   NAV INTERACTIONS
+   NAV
 ───────────────────────────────────────── */
-navName.addEventListener('click', closeAllPanels);
+navName.addEventListener('click', closePanel);
 
-contactLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  openSection('contact');
+document.querySelectorAll('.nav-right a[data-target]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    openSection(link.dataset.target);
+  });
 });
