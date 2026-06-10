@@ -102,7 +102,7 @@ function positionTooltip(hs) {
 /* ─────────────────────────────────────────
    NAV
 ───────────────────────────────────────── */
-navName.addEventListener('click', closePanel);
+if (navName) navName.addEventListener('click', closePanel);
 
 document.querySelectorAll('.nav-right a[data-target]').forEach(link => {
   link.addEventListener('click', e => {
