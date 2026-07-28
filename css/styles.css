@@ -107,6 +107,30 @@ nav {
 }
 .tab-close:hover { opacity: 1; }
 
+/* ─── NAV TOGGLE (mobile) ─────────────── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
 /* ─── HERO ────────────────────────────── */
 .hero {
   position: fixed;
@@ -225,6 +249,23 @@ nav {
 .panel-inner {
   padding: 2.5rem 3.5rem 4rem;
 }
+
+.panel-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink-light);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.panel-close:hover { color: var(--ink); border-color: rgba(0,0,0,0.3); }
 
 /* ─── PANEL CONTENT ───────────────────── */
 .section-label {
@@ -403,7 +444,36 @@ footer p {
   :root { --panel-w: 100%; }
 
   nav { padding: 0 1.25rem; }
-  .nav-right { gap: 1.5rem; }
+
+  .nav-toggle { display: flex; }
+
+  .nav-right {
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(245,241,234,0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+  }
+  .nav-right.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .nav-right a {
+    padding: 1rem 1.25rem;
+    font-size: 0.75rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  }
+
+  .panel-close { top: 1rem; right: 1.25rem; }
 
   .hero {
     justify-content: space-between;

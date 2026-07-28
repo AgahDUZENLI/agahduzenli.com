@@ -71,7 +71,10 @@ async function loadGithubProjects() {
 const hero         = document.getElementById('hero');
 const sidePanel    = document.getElementById('side-panel');
 const panelContent = document.getElementById('panel-content');
+const panelClose   = document.getElementById('panel-close');
 const navName      = document.getElementById('nav-name');
+const navToggle    = document.getElementById('nav-toggle');
+const navRight     = document.getElementById('nav-right');
 const heroTitle    = document.getElementById('hero-title');
 const tooltip      = document.getElementById('tooltip');
 const hotspots     = document.querySelectorAll('.hotspot');
@@ -121,6 +124,27 @@ function closePanel() {
 }
 
 /* ─────────────────────────────────────────
+   MOBILE NAV DROPDOWN
+───────────────────────────────────────── */
+function closeMobileNav() {
+  if (navToggle) {
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  if (navRight) navRight.classList.remove('open');
+}
+
+if (navToggle && navRight) {
+  navToggle.addEventListener('click', () => {
+    const open = navRight.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+
+if (panelClose) panelClose.addEventListener('click', closePanel);
+
+/* ─────────────────────────────────────────
    HOTSPOTS
 ───────────────────────────────────────── */
 function clearHoverLayers() {
@@ -166,6 +190,7 @@ if (navName) navName.addEventListener('click', closePanel);
 document.querySelectorAll('.nav-right a[data-target]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
+    closeMobileNav();
     openSection(link.dataset.target);
   });
 });

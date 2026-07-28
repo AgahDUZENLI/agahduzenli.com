@@ -26,7 +26,11 @@
       <span class="nav-name" id="nav-name"></span>
     </div>
 
-    <div class="nav-right">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-right" id="nav-right">
       <a href="#" data-target="about">About</a>
       <a href="#" data-target="cs">CS & Code</a>
       <a href="#" data-target="architecture-design">Architecture-Design</a>
@@ -68,6 +72,7 @@
 
   <!-- SIDE PANEL -->
   <div class="side-panel" id="side-panel">
+    <button class="panel-close" id="panel-close" aria-label="Close">×</button>
     <div class="panel-inner" id="panel-content"></div>
   </div>
 
